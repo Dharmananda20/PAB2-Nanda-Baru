@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_daftar_movie/models/movie.dart';
+import 'package:flutter_daftar_movie/screens/detail_screen.dart';
 import 'package:flutter_daftar_movie/services/api_services.dart';
 
 
@@ -91,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DetailScreen(movie: movie),
+                        builder: (context) => DetailScreen(),
                       ),
                     )
                   },
