@@ -23,7 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
   @override
-  initState() {
+  void initState() {
+    // TODO: implement initState
     super.initState();
     _loadMovies();
   }
@@ -40,8 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     setState(() {
       _allMovies = allMoviesData.map((e) => Movie.fromJson(e)).toList();
-      _trendingMovies =
-          trendingMoviesData.map((e) => Movie.fromJson(e)).toList();
+      _trendingMovies = trendingMoviesData.map((e) => Movie.fromJson(e)).toList();
       _popularMovies = popularMoviesData.map((e) => Movie.fromJson(e)).toList();
     });
   }
@@ -50,9 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pilem'),
-      ),
+      appBar: AppBar(title: const Text('Film')),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,21 +62,21 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-
-
   }
 
 
   Widget _buildMoviesList(String title, List<Movie> movies) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          title,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            title,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ),
-      ),
-      SizedBox(
+        SizedBox(
           height: 200,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -88,13 +86,14 @@ class _HomeScreenState extends State<HomeScreen> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
-                  onTap: () => {
+                  onTap: () {
+                    // Handle movie tap, e.g., navigate to details page
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DetailScreen(),
+                        builder: (context) => DetailScreen(movie: movie),
                       ),
-                    )
+                    );
                   },
                   child: Column(
                     children: [
@@ -116,7 +115,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             },
-          )),
-    ]);
+          ),
+        ),
+      ],
+    );
   }
 }
